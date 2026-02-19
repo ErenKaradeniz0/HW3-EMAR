@@ -6,35 +6,65 @@ namespace HW3_EMAR
     {
         static void Main(string[] args)
         {
-            Console.Write("Kutu Genişliği: ");
-            int.TryParse(Console.ReadLine(), out int width);
+            int width = ReadInt("Kutu Genişliği: ");
+            int height = ReadInt("Kutu Yüksekliği: ");
+            bool isFilled = ReadFillOption("İçi dolu olacak mı (E/H): ");
 
-            Console.Write("Kutu Yüksekliği: ");
-            int.TryParse(Console.ReadLine(), out int height);
+            DrawBox(width, height, isFilled);
+        }
 
-            Console.Write("İçi dolu olacak mı (E/H): ");
-            var fill = Console.ReadLine()?.ToUpper();
+        // INPUT METHODS
+        static int ReadInt(string message)
+        {
+            Console.Write(message);
 
-            Console.WriteLine();
+            if (!int.TryParse(Console.ReadLine(), out int value))
+                return 0;
 
-            // ÜST
-            Console.WriteLine(new string('=', width));
+            return value;
+        }
 
-            // ORTA
+        static bool ReadFillOption(string message)
+        {
+            Console.Write(message);
+            var input = Console.ReadLine()?.Trim().ToUpper();
+
+            return input == "E";
+        }
+
+        // DRAW METHODS
+        static void DrawBox(int width, int height, bool filled)
+        {
+            DrawTop(width);
+            DrawMiddle(width, height, filled);
+            DrawBottom(width);
+        }
+
+        static void DrawTop(int width)
+        {
+            Console.Write('╔');
+            Console.Write(new string('═', width));
+            Console.WriteLine('╗');
+        }
+
+        static void DrawMiddle(int width, int height, bool filled)
+        {
             for (int i = 0; i < height - 2; i++)
             {
-                Console.Write("||");
+                Console.Write('║');
 
-                if (fill == "E")
-                    Console.Write(new string('*', width - 4));
-                else
-                    Console.Write(new string(' ', width - 4));
+                char fillChar = filled ? '*' : ' ';
+                Console.Write(new string(fillChar, width));
 
-                Console.WriteLine("||");
+                Console.WriteLine('║');
             }
+        }
 
-            // ALT
-            Console.WriteLine(new string('=', width));
+        static void DrawBottom(int width)
+        {
+            Console.Write('╚');
+            Console.Write(new string('═', width));
+            Console.WriteLine('╝');
         }
     }
 }
