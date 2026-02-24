@@ -49,12 +49,14 @@ namespace HW3_EMAR
                     Console.WriteLine();
                     DrawMiddle(width, height, filled);
                     DrawBottom(width);
+                    Console.WriteLine();
                 }
             }
             else
             {
                 foreach (var i in Enumerable.Range(0, boxNumber))
                 {
+                    Console.Write(" ");
                     DrawTop(width);
                 }
                 Console.WriteLine();
@@ -65,6 +67,7 @@ namespace HW3_EMAR
                 }
                 foreach (var i in Enumerable.Range(0, boxNumber))
                 {
+                    Console.Write(" ");
                     DrawBottom(width);
                 }
             }
@@ -94,6 +97,7 @@ namespace HW3_EMAR
         {
             for (int i = 0; i < boxNumber; i++)
             {
+                Console.Write(" ");
                 Console.Write('║');
 
                 char fillChar = filled ? '*' : ' ';
